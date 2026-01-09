@@ -1,17 +1,17 @@
 import time
 from typing import Optional
 
-from zbot.config import (
+from config import (
     BOT_OUT_PREFIX,
     BOT_PREFIX,
     COOLDOWN_SECONDS,
     POLL_SECONDS,
     logger,
 )
-from zbot.db.messages import MessagesDatabase
-from zbot.services.message_sender import MessageSender
-from zbot.services.openai_client import OpenAIClient
-from zbot.utils.message_decoder import MessageDecoder
+from db.messages import MessagesDatabase
+from services.message_sender import MessageSender
+from services.openai_client import OpenAIClient
+from utils.message_decoder import MessageDecoder
 
 
 class iMessageBot:

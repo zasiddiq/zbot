@@ -1,11 +1,11 @@
 import argparse
 
-from zbot.config import LIST_LIMIT
-from zbot.contacts.manager import ContactsManager
-from zbot.db.messages import MessagesDatabase
-from zbot.services.openai_client import OpenAIClient
-from zbot.ui.chat_picker import ChatPicker
-from zbot.bot.imessage_bot import iMessageBot
+from config import LIST_LIMIT
+from contacts.manager import ContactsManager
+from db.messages import MessagesDatabase
+from services.openai_client import OpenAIClient
+from ui.chat_picker import ChatPicker
+from bot.imessage_bot import iMessageBot
 
 
 def main() -> None:

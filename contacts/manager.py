@@ -15,9 +15,9 @@ try:
 except Exception:
     CONTACTS_AVAILABLE = False
 
-from zbot.config import logger
-from zbot.utils.phone_normalizer import PhoneNormalizer
-from zbot.utils.email_normalizer import EmailNormalizer
+from config import logger
+from utils.phone_normalizer import PhoneNormalizer
+from utils.email_normalizer import EmailNormalizer
 
 
 class ContactsManager:

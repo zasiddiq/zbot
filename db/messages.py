@@ -1,7 +1,7 @@
 import sqlite3
 from typing import List, Optional
 
-from zbot.config import CHAT_DB
+from config import CHAT_DB
 
 
 class MessagesDatabase:

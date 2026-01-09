@@ -1,8 +1,8 @@
 from typing import Optional, Tuple, List
 
-from zbot.config import LIST_LIMIT
-from zbot.contacts.manager import ContactsManager, CONTACTS_AVAILABLE
-from zbot.db.messages import MessagesDatabase
+from config import LIST_LIMIT
+from contacts.manager import ContactsManager, CONTACTS_AVAILABLE
+from db.messages import MessagesDatabase
 
 
 class ChatPicker:

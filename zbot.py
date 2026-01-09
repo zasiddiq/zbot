@@ -11,7 +11,7 @@ Requirements:
 - Messages.app with chat.db database
 """
 
-from zbot.cli import main
+from cli import main
 
 
 if __name__ == "__main__":

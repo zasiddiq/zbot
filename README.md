@@ -102,14 +102,31 @@ python zbot.py --hint "work" --with-contacts --limit 20
 
 ### Architecture
 
-The bot is organized into several key components:
+The bot is organized into a small set of focused modules:
 
-1. **MessagesDatabase**: Handles read-only access to the Messages `chat.db` database
-2. **ContactsManager**: Manages contact lookup using macOS Contacts framework
-3. **OpenAIClient**: Interfaces with OpenAI API for generating responses
-4. **MessageSender**: Sends messages via AppleScript to Messages.app
-5. **ChatPicker**: Provides interactive chat selection interface
-6. **iMessageBot**: Main bot class that orchestrates monitoring and responding
+- **Entry point**
+  - `zbot.py`: Thin CLI entry that just calls `cli.main()`
+  - `cli.py`: Parses arguments, wires together services, and starts the bot
+
+- **Configuration**
+  - `config.py`: All constants and logging setup:
+    - `CHAT_DB`, `BOT_PREFIX`, `BOT_OUT_PREFIX`, `MODEL`
+    - `POLL_SECONDS`, `COOLDOWN_SECONDS`, `MAX_CONTEXT_MESSAGES`, `LIST_LIMIT`
+    - `logger`
+
+- **Core components**
+  - `db/messages.py` (`MessagesDatabase`): Read-only access to the Messages `chat.db` database
+  - `contacts/manager.py` (`ContactsManager`): Contacts lookup + `CONTACTS_AVAILABLE` flag
+  - `services/openai_client.py` (`OpenAIClient`): OpenAI API wrapper + history management
+  - `services/message_sender.py` (`MessageSender`): Sends messages via AppleScript to Messages.app
+  - `ui/chat_picker.py` (`ChatPicker`): Interactive chat selection interface
+  - `bot/imessage_bot.py` (`iMessageBot`): Main loop that monitors a single chat and responds
+
+- **Utilities**
+  - `utils/phone_normalizer.py` (`PhoneNormalizer`): Normalizes phone numbers to E.164-ish
+  - `utils/email_normalizer.py` (`EmailNormalizer`): Normalizes emails (lowercasing/validation)
+  - `utils/message_decoder.py` (`MessageDecoder`): Extracts text from `text` / `attributedBody`
+  - `utils/applescript_escaper.py` (`AppleScriptEscaper`): Escapes strings for AppleScript
 
 ### Message Flow
 
@@ -137,7 +154,7 @@ The bot will respond with:
 
 ### Configuration
 
-Edit the constants at the top of `zbot.py` to customize:
+Edit `config.py` to customize behavior:
 
 - `BOT_PREFIX`: Trigger prefix (default: `"@zbot"`)
 - `BOT_OUT_PREFIX`: Prefix for bot responses (default: `"🤖 "`)
@@ -145,6 +162,7 @@ Edit the constants at the top of `zbot.py` to customize:
 - `POLL_SECONDS`: How often to check for new messages (default: `2`)
 - `COOLDOWN_SECONDS`: Minimum time between responses (default: `6`)
 - `MAX_CONTEXT_MESSAGES`: Maximum conversation history to keep (default: `20`)
+- `LIST_LIMIT`: How many chats to show in the picker (default: `30`)
 
 ## Database Access
 

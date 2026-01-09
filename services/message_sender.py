@@ -1,6 +1,6 @@
 import subprocess
 
-from zbot.utils.applescript_escaper import AppleScriptEscaper
+from utils.applescript_escaper import AppleScriptEscaper
 
 
 class MessageSender:

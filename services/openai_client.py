@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 import openai
 from openai import OpenAI
 
-from zbot.config import MAX_CONTEXT_MESSAGES, MODEL, logger
+from config import MAX_CONTEXT_MESSAGES, MODEL, logger
 
 
 class OpenAIClient:
