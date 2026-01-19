@@ -76,8 +76,14 @@ class iMessageBot:
         if prefix_lower in text_lower:
             # Find the position in the original string (case-insensitive)
             idx = text_lower.find(prefix_lower)
-            # Remove the prefix and any surrounding whitespace
-            prompt = text[:idx] + text[idx + len(BOT_PREFIX):]
+            # Remove the prefix and clean up surrounding whitespace
+            before = text[:idx].rstrip()
+            after = text[idx + len(BOT_PREFIX):].lstrip()
+            # Combine with a single space if both parts exist
+            if before and after:
+                prompt = before + " " + after
+            else:
+                prompt = before + after
             return prompt.strip()
         return text.strip()
 
