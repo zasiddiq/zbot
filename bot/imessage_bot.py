@@ -57,8 +57,8 @@ class iMessageBot:
         if text.startswith(BOT_OUT_PREFIX):
             return False
 
-        # Only respond to messages starting with trigger prefix
-        if not text.lower().startswith(BOT_PREFIX.lower()):
+        # Respond to messages containing the trigger prefix anywhere in the message
+        if BOT_PREFIX.lower() not in text.lower():
             return False
 
         # Cooldown check
@@ -70,8 +70,16 @@ class iMessageBot:
 
     def extract_prompt(self, text: str) -> str:
         """Extract user prompt from message text (remove trigger prefix)."""
-        prefix_len = len(BOT_PREFIX)
-        return text[prefix_len:].strip()
+        # Case-insensitive replacement of the first occurrence of BOT_PREFIX
+        text_lower = text.lower()
+        prefix_lower = BOT_PREFIX.lower()
+        if prefix_lower in text_lower:
+            # Find the position in the original string (case-insensitive)
+            idx = text_lower.find(prefix_lower)
+            # Remove the prefix and any surrounding whitespace
+            prompt = text[:idx] + text[idx + len(BOT_PREFIX):]
+            return prompt.strip()
+        return text.strip()
 
     def send_reply(self, reply: str) -> bool:
         """
